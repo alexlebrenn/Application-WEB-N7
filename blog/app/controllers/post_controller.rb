@@ -29,7 +29,7 @@ class PostController < ApplicationController
 		@post.title = params[:title]
 		@post.body = params[:body]		
 		@post.save
-		redirect_to posts_path
+		redirect_to show_path
 	end
 
 	def delete

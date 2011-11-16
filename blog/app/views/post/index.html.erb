@@ -5,7 +5,6 @@
 		---------------------------------------------------------------
 		<li>
 			<%= link_to p.title, show_path(p.id)%> <br>
-				<!--<br><a href=/posts/modify/<%=p.id%>> Modifier</a><br>!-->
 				<br><%= button_to "Modifier", receive_path(p.id), :method => :receive %>&nbsp &nbsp
 				<%= button_to "Supprimer", delete_path(p.id), :id => p.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Post ?', :method => :delete %>
 		</li><br>

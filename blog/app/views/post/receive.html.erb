@@ -4,7 +4,7 @@
 
 <div>
 	<p>
-   <%= form_tag(show_path(@post.id), :method => "put") do %>
+   <%= form_tag(show_path(@post), :method => "put") do %>
 			<p><div class ="field">
 			 	<br><label for="title">Titre du Post: </label>
 			 	<br><input type="text" id="title" name="title" cols="40" value="<%=@post.title%>" />
