@@ -1,0 +1,19 @@
+<div class="Header">
+	<h2> <font color="blue"> Affichage du Post n°<%=@post.id%></font></h2>
+</div>
+
+<div>
+	<p>
+		<p>
+			<div class ="field">
+			 	<br><label for="title">Titre du Post: </label>
+			 	<br><input type="text" readonly="true" id="title" name="title" cols="40" value="<%=@post.title%>" />
+			</div>
+		</p>
+		<div class ="field">
+			<br><label for="body">Message : </label>
+			<br><textarea readonly name="body" id="body" rows="10" cols="40"><%=@post.body%></textarea>
+		</div>
+		<%= button_to "Page daccueil", posts_path, :method => "get" %>
+	</p>
+</div>

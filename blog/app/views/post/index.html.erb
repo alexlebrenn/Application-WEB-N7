@@ -1,5 +1,24 @@
-<h1>Post#index</h1>
+<!--<h2>Post#index</h2>!-->
+<h2> <font color="blue"> Affichage de la liste des Posts</font></h2> 	
+<ul>
 	<% @posts.each do |p| %>
-		<%= p.title %>
+		---------------------------------------------------------------
+		<li>
+			<%= link_to p.title, show_path(p.id)%> <br>
+				<!--<br><a href=/posts/modify/<%=p.id%>> Modifier</a><br>!-->
+				<br><%= button_to "Modifier", receive_path(p.id), :method => :receive %>&nbsp &nbsp
+				<%= button_to "Supprimer", delete_path(p.id), :id => p.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Post ?', :method => :delete %>
+		</li><br>
 	<% end %>
-<p>Find me in app/views/post/index.html.erb</p>
+</ul>
+
+&nbsp &nbsp &nbsp &nbsp ---------------------------------------------------------------
+
+<form action="/posts/new" method="GET">
+	<p>
+		<input type="submit" name="new_post" value="Ajouter un nouveau post">
+	</p>
+</form>
+	
+<!--<p>Find me in app/views/post/index.html.erb</p> !-->
+

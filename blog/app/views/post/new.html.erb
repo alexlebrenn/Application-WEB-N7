@@ -1,0 +1,22 @@
+<!-- L'utilisation des div permettra une mise en page simplifiée via CSS -->
+<div class="Header">
+	<h2> <font color="blue"> Creation d'un nouveau Post</font></h2>
+</div>
+
+<div>
+	<p>
+		<form action="/posts" method="POST">
+			<p><div class ="field">
+			 	<br><label for="title">Titre du Post: </label>
+			 	<br><input type="text" id="title" name="title" cols="40" />
+			</div></p>
+			<div class ="field">
+				<br><label for="body">Message : </label>
+				<br><textarea name="body" id="body" rows="10" cols="40" ></textarea>
+			</div>
+			<div class ="actions">
+				<br><br><input type="submit" name="ValidatePost" value="Valider"><br>
+			</div>
+		</form>
+	</p>
+</div>

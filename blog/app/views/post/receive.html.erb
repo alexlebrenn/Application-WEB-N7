@@ -1,0 +1,21 @@
+<div class="Header">
+	<h2> <font color="blue"> Modification du Post n°<%=@post.id%></font></h2>
+</div>
+
+<div>
+	<p>
+   <%= form_tag(show_path(@post.id), :method => "put") do %>
+			<p><div class ="field">
+			 	<br><label for="title">Titre du Post: </label>
+			 	<br><input type="text" id="title" name="title" cols="40" value="<%=@post.title%>" />
+			</div></p>
+			<div class ="field">
+				<br><label for="body">Message : </label>
+				<br><textarea name="body" id="body" rows="10" cols="40"><%=@post.body%></textarea>
+			</div>
+			<div class ="actions">
+				<br><br><input type="submit" name="ValidatePost" value="Valider"><br>
+			</div>
+	<% end %>	
+	</p>
+</div>

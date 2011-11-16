@@ -1,6 +1,7 @@
 require 'spec_helper'
-	describe PostController do
-		describe "GET 'index'" do
+
+describe PostController do
+	describe "GET 'index'" do
 		before(:each) do
 			@posts = [stub_model(Post,:title => "1"), stub_model(Post, :title => "2")]
 			Post.stub(:all){ @posts }
@@ -17,6 +18,10 @@ require 'spec_helper'
 			get 'index'
 			response.should render_template(:index)
 		end
+	end
+
+	describe "POST 'new'" do
+	
 	end
 end
 

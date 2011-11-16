@@ -4,8 +4,15 @@ Blog::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-	get "/posts", :controller => :post, :action => :index
-  # Sample of regular route:
+	get "/posts", 								:controller => :post, :action => :index
+	get "/posts/new", 						:controller => :post, :action => :new
+	post "/posts", 								:controller => :post, :action => :create
+	get "/posts/:id", 						:controller => :post, :action => :show, :as => :show
+	post "/posts/modify/:id",			:controller => :post, :action => :receive, :as => :receive
+	delete "/post/delete/:id", 		:controller => :post, :action => :delete, :as => :delete
+	put "/posts/:id", 						:controller => :post, :action => :modify, :as => :modify
+  
+	# Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
