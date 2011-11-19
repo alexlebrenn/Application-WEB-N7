@@ -1,22 +1,19 @@
-<!-- L'utilisation des div permettra une mise en page simplifiée via CSS -->
+<!-- Page de création d'un Post : /posts/new !-->
+
 <div class="Header">
 	<h2> <font color="blue"> Creation d'un nouveau Post</font></h2>
 </div>
 
-<div>
-	<p>
-		<form action="/posts" method="POST">
-			<p><div class ="field">
-			 	<br><label for="title">Titre du Post: </label>
-			 	<br><input type="text" id="title" name="title" cols="40" />
-			</div></p>
-			<div class ="field">
-				<br><label for="body">Message : </label>
-				<br><textarea name="body" id="body" rows="10" cols="40" ></textarea>
-			</div>
-			<div class ="actions">
-				<br><br><input type="submit" name="ValidatePost" value="Valider"><br>
-			</div>
-		</form>
-	</p>
-</div>
+<%= form_tag(posts_path, :method => "post", :id => 'new_post' ) do %>
+	<div class ="field">
+		 	<br><label for="title">Titre du Post: </label>
+		 	<br><input type="text" id="title" name="title" cols="40" />
+	</div>
+	<div class ="field">
+		<br><label for="body">Message : </label>
+		<br><textarea name="body" id="body" rows="10" cols="40" ></textarea>
+	</div><br>
+	<%= submit_tag("Valider") %>
+<% end %>
+
+<br><%= button_to "Page daccueil", posts_path, :method => "get" %>

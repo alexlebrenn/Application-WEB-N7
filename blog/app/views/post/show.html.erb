@@ -2,18 +2,30 @@
 	<h2> <font color="blue"> Affichage du Post n°<%=@post.id%></font></h2>
 </div>
 
-<div>
-	<p>
-		<p>
-			<div class ="field">
-			 	<br><label for="title">Titre du Post: </label>
-			 	<br><input type="text" readonly="true" id="title" name="title" cols="40" value="<%=@post.title%>" />
-			</div>
-		</p>
-		<div class ="field">
-			<br><label for="body">Message : </label>
-			<br><textarea readonly name="body" id="body" rows="10" cols="40"><%=@post.body%></textarea>
-		</div>
-		<%= button_to "Page daccueil", posts_path, :method => "get" %>
-	</p>
-</div>
+<%= form_tag(show_path(@post.id), :method => "get", :id => 'show_post' ) do %>
+	<div class ="field">
+		 	<br><label for="title">Titre du Post: </label>
+		 	<br><input type="text" readonly="true" id="title" name="title" cols="40" value="<%=@post.title%>" />
+	</div>
+	<div class ="field">
+		<br><label for="body">Message : </label>
+		<br><textarea readonly name="body" id="body" rows="10" cols="40"><%=@post.body%></textarea>
+	</div><br>
+<% end %>
+
+
+<br><h3><font color="blue">Commentaires</font></h3>
+<% @post.comments.each do |comment| %>
+	<div class ="field">
+	 	<label for="author">Auteur : &nbsp </label>
+	 	<input type="text_comment" readonly="true" id="author" name="author" cols="10" value="<%=comment.author%>"/>
+		&nbsp <%= link_to "Modifier", edit_post_comment_path(comment.post.id, comment.id)%>
+		<br><label for="comment_body">Contenu : </label>
+		<input type="text_comment" readonly="true" id="comment_body" name="comment_body" cols="10" value="<%=comment.body%>"/>
+		&nbsp <%= link_to "Supprimer", delete_post_comment_path(comment.post.id, comment.id), :id => comment.post.id, :comment_id => comment.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Commentaire ?', :method => :delete %>
+	</div><br>
+<% end %>
+
+<%= button_to 'Ajouter un commentaire', new_post_comment_path, :method => "get" %>
+
+<br><%= button_to "Page daccueil", posts_path, :method => "get" %><br>

@@ -1,0 +1,19 @@
+<!-- Page de création d'un Post : /posts/new !-->
+
+<div class="Header">
+	<h2> <font color="blue"> Affichage d'un commentaire</font></h2>
+</div>
+
+<p id="notice"><%= notice %></p>
+<p>
+  <b>Auteur:</b>
+  <%= @comment.author %>
+</p>
+<p>
+  <b>Commentaire:</b>
+  <%= @comment.body %>
+</p>
+<!-- /posts/:post_id/comments/:id/edit -->
+<%= link_to 'Edit', edit_post_comment_path(@comment.post, @comment) %> |
+<!-- /posts/:post_id/comments/ -->
+<%= link_to 'Back', post_comments_path(@comment.post) %>

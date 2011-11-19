@@ -1,17 +1,26 @@
 Blog::Application.routes.draw do
   get "post/index"
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
 	get "/posts", 								:controller => :post, :action => :index
-	get "/posts/new", 						:controller => :post, :action => :new
-	get "/posts/:id", 						:controller => :post, :action => :show, :as => :show
+	get "/posts/new", 						:controller => :post, :action => :new, 			:as => :new
+	get "/posts/:id", 						:controller => :post, :action => :show, 		:as => :show
 	post "/posts", 								:controller => :post, :action => :create
-	delete "/post/delete/:id", 		:controller => :post, :action => :delete, :as => :delete
-	post "/posts/modify/:id",			:controller => :post, :action => :receive, :as => :receive
-	put '/posts/:id', 						:controller => :post, :action => :modify, :as => :modify
-  
+	delete "/post/delete/:id", 		:controller => :post, :action => :delete, 	:as => :delete
+	post "/posts/modify/:id",			:controller => :post, :action => :receive, 	:as => :receive
+	put "/posts/:id", 						:controller => :post, :action => :modify, 	:as => :modify
+
+	get "/posts/:id/comments", 									:controller => :comments, :action => :index
+	post "/posts/:id/comments", 								:controller => :comments, :action => :create, :as => :create_post_comment
+	get "/posts/:id/comments/new",							:controller => :comments, :action => :new, 		:as => :new_post_comment
+	get "/posts/:id/comments/:comment_id/edit", :controller => :comments, :action => :edit, 	:as => :edit_post_comment
+	get "/posts/:id/comments/:comment_id", 			:controller => :comments, :action => :show, 	:as => :post_comment
+	put "/posts/:id/comments/:comment_id", 			:controller => :comments, :action => :update, :as => :update_post_comment
+	delete "/posts/:id/comments/:comment_id", 	:controller => :comments, :action => :delete, :as => :delete_post_comment
+
+	resources :posts do
+		resources :comments
+	end
+ 
 	# Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
