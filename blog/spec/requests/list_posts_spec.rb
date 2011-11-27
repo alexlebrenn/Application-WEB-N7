@@ -11,7 +11,6 @@ describe "AffichageListePosts" do
 
 	describe "GET /posts" do
 		it "generates a listing of posts" do
-			#page.status.should be(200)
 			page.body.should include(@post1.title)
 			page.body.should include(@post2.title)
 		end
@@ -28,7 +27,7 @@ end
 
 describe "CreationDePost" do
 	before (:each) do
-		visit posts_new_path
+		visit new_path
 	end	
 
 	describe "GET /posts/new" do

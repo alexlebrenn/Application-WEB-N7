@@ -9,13 +9,14 @@ Blog::Application.routes.draw do
 	post "/posts/modify/:id",			:controller => :post, :action => :receive, 	:as => :receive
 	put "/posts/:id", 						:controller => :post, :action => :modify, 	:as => :modify
 
-	get "/posts/:id/comments", 									:controller => :comments, :action => :index
-	post "/posts/:id/comments", 								:controller => :comments, :action => :create, :as => :create_post_comment
+	get "/posts/:id", 													:controller => :comments, :action => :indexcomment
 	get "/posts/:id/comments/new",							:controller => :comments, :action => :new, 		:as => :new_post_comment
-	get "/posts/:id/comments/:comment_id/edit", :controller => :comments, :action => :edit, 	:as => :edit_post_comment
 	get "/posts/:id/comments/:comment_id", 			:controller => :comments, :action => :show, 	:as => :post_comment
-	put "/posts/:id/comments/:comment_id", 			:controller => :comments, :action => :update, :as => :update_post_comment
+	post "/posts/:id/comments", 								:controller => :comments, :action => :create, :as => :create_post_comment
 	delete "/posts/:id/comments/:comment_id", 	:controller => :comments, :action => :delete, :as => :delete_post_comment
+	get "/posts/:id/comments/:comment_id/edit",:controller => :comments, :action => :edit, 	:as => :edit_post_comment
+	put "/posts/:id/comments/:comment_id", 			:controller => :comments, :action => :update, :as => :update_post_comment
+
 
 	resources :posts do
 		resources :comments

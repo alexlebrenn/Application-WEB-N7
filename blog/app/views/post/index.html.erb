@@ -1,21 +1,32 @@
 <!--Page Principal du blog => /posts !-->
 
-<h2>
-	<font color="blue"> Affichage de la liste des Posts</font>
-</h2>
- 
+<head>
+ <%= stylesheet_link_tag "index" %>
+</head>
+
+<div class="bordure-top"></div>
+<div class="bordure-left"></div>
+<div class="bordure-right"></div>
+
+<body>
+	<%= yield %>
+
+	<h1>
+		Affichage de la liste des Posts
+	</h1>
+
+
 <ul>
-	<% @posts.each do |p| %>
-		---------------------------------------------------------------
-		<li>
-			<%= link_to p.title, show_path(p.id)%> <br>
-				<br><%= button_to "Modifier", receive_path(p.id), :method => :receive %>&nbsp &nbsp
-				<%= button_to "Supprimer", delete_path(p.id), :id => p.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Post ?', :method => :delete %>
-		</li>
-	<% end %>
+	<div class="middle">
+		<% @posts.each do |p| %>
+			<hr><li>
+				<%= link_to p.title, show_path(p.id)%> <br>
+					<br><%= button_to "Modifier", receive_path(p.id), :method => :receive %>&nbsp &nbsp
+					<%= button_to "Supprimer", delete_path(p.id), :id => p.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Post ?', :method => :delete %>
+			</li><hr>
+		<% end %>
+	<br><%= button_to "Ajouter un nouveau post", new_path, :method => 'get' %>
+	</div>
 </ul>
 
-&nbsp &nbsp &nbsp &nbsp ---------------------------------------------------------------
-
-<br><%= button_to "Ajouter un nouveau post", new_path, :method => 'get' %>
-
+</body>

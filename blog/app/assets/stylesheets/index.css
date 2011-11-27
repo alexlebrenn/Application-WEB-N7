@@ -1,0 +1,58 @@
+body {
+	background-color:#BBBBBB;
+  text-align: center;
+	border: 0;
+	overflow: auto; /* Activer (auto ou scroll) ou desactiver (hidden) la scrollbar */
+	height: 100%;
+	max-height: 100%; 
+}
+
+/* Affichage liste des posts */
+div.middle {
+  text-align: center;
+  border: 6px ridge black ;
+	position:relative;
+  left:21em;
+  width:40em;
+  height:center;
+}
+
+/* Bannière horizontale */
+div.bordure-top {
+  padding-top: 168px;
+  background-image: url(gaming.png);
+  background-position: center;
+  background-repeat: no-repeat;
+	background-color:#959595;
+}
+
+/* Bannière gauche */
+div.bordure-left, div.bordure-right {
+  background-image: url(left.png);
+  background-position: center;
+  background-repeat: repeat-y;
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	width: 200px; /* Largeur de le frame */
+	height: 100%; /* Hauteur de le frame */
+}
+
+/* Bannière droite */
+div.bordure-right {
+  background-image: url(right.png);
+	left: auto;
+	right: 0; 
+	width: 200px; /* Largeur de le frame */
+}
+
+/* Titre h1 */
+h1 {
+  font-family: serif;
+  background: #959595 none;
+  color: black;
+  border: 3px dotted #BBBBBB;
+  padding: 0.1em;
+  text-align: center;
+  letter-spacing: 0.2em;
+}

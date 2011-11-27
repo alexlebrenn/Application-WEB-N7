@@ -1,19 +1,12 @@
 <!-- Page de création d'un Post : /posts/new !-->
 
+<div class="bordure-left"></div>
+<div class="bordure-right"></div>
 <div class="Header">
-	<h2> <font color="blue"> Ajout d'un commentaire</font></h2>
+	<h1>Ajout d'un commentaire</h1>
 </div>
 
-<%= form_for([@comment.post, @comment]) do |f| %>
-  <div class="field">
-    <%= f.label :author %><br />
-    <%= f.text_field :author %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<%= render 'form' %>
+
+<!-- /posts/:post_id/comments/ -->
+<br><%= button_to 'Retour', show_path(@comment.post), :method => 'get' %>

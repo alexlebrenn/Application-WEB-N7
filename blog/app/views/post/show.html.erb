@@ -1,5 +1,8 @@
+<div class="bordure-left"></div>
+<div class="bordure-right"></div>
+
 <div class="Header">
-	<h2> <font color="blue"> Affichage du Post n°<%=@post.id%></font></h2>
+	<h1>Affichage du Post n°<%=@post.id%></h1>
 </div>
 
 <%= form_tag(show_path(@post.id), :method => "get", :id => 'show_post' ) do %>
@@ -14,18 +17,18 @@
 <% end %>
 
 
-<br><h3><font color="blue">Commentaires</font></h3>
+<h1>Commentaires</h1>
 <% @post.comments.each do |comment| %>
 	<div class ="field">
 	 	<label for="author">Auteur : &nbsp </label>
 	 	<input type="text_comment" readonly="true" id="author" name="author" cols="10" value="<%=comment.author%>"/>
-		&nbsp <%= link_to "Modifier", edit_post_comment_path(comment.post.id, comment.id)%>
-		<br><label for="comment_body">Contenu : </label>
+		&nbsp <%= link_to "Modifier", edit_post_comment_path(comment.post.id, comment.id), :id => "modify_comment#{comment.id}"%>
+		<br><%= link_to "Contenu :", post_comment_path(comment.post,comment.id), :id => "comment#{comment.id}"%>
 		<input type="text_comment" readonly="true" id="comment_body" name="comment_body" cols="10" value="<%=comment.body%>"/>
-		&nbsp <%= link_to "Supprimer", delete_post_comment_path(comment.post.id, comment.id), :id => comment.post.id, :comment_id => comment.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Commentaire ?', :method => :delete %>
+		&nbsp <%= link_to "Supprimer", delete_post_comment_path(comment.post.id, comment.id), :id => "delete_comment#{comment.id}", :comment_id => comment.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Commentaire ?', :method => :delete %>
 	</div><br>
 <% end %>
 
 <%= button_to 'Ajouter un commentaire', new_post_comment_path, :method => "get" %>
 
-<br><%= button_to "Page daccueil", posts_path, :method => "get" %><br>
+<%= button_to "Page daccueil", posts_path, :method => "get" %><br>
