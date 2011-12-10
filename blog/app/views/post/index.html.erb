@@ -1,5 +1,4 @@
 <!--Page Principal du blog => /posts !-->
-
 <head>
  <%= stylesheet_link_tag "index" %>
 </head>
@@ -7,26 +6,37 @@
 <div class="bordure-top"></div>
 <div class="bordure-left"></div>
 <div class="bordure-right"></div>
-
+<div class="authentification">
+<h1>	Bienvenue <%= session[:firstname] %> </h1>
+	<% if !session[:login] %>
+		<%= link_to "S'authentifier", login_person_path, :method => 'get' , :remote => true%>
+		<p style="color : green"> <%= flash[:notice] %></p>
+		<p style="color : red"> <%= flash[:error] %></p>
+ 		<%= button_to "Créer un compte", new_person_path, :method => 'get' %>
+	<% else %>
+		<%= button_to "Mon compte", show_person_path(session[:id]), :method => 'get'%>
+		<%= button_to "Se déconnecter", logout_person_path, :method => 'get'%>
+		<p style="color : green"> <%= flash[:notice] %></p>
+	<% end %>
+</div>
 <body>
 	<%= yield %>
-
 	<h1>
 		Affichage de la liste des Posts
 	</h1>
-
-
-<ul>
+	
 	<div class="middle">
 		<% @posts.each do |p| %>
 			<hr><li>
 				<%= link_to p.title, show_path(p.id)%> <br>
-					<br><%= button_to "Modifier", receive_path(p.id), :method => :receive %>&nbsp &nbsp
+				<% if (session[:id] == p.person_id) and (session[:id] != nil) %>
+					<br><%= button_to "Modifier", receive_path(p.id), :method => :receive %>
 					<%= button_to "Supprimer", delete_path(p.id), :id => p.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Post ?', :method => :delete %>
+				<% end %>
 			</li><hr>
 		<% end %>
-	<br><%= button_to "Ajouter un nouveau post", new_path, :method => 'get' %>
+		<% if session[:login] %>
+			<br><%= button_to "Ajouter un nouveau post", new_path, :method => 'get' %>
+		<% end %>	
 	</div>
-</ul>
-
 </body>

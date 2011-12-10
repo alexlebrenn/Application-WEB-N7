@@ -8,8 +8,12 @@
 
 <%= form_tag(posts_path, :method => "post", :id => 'new_post' ) do %>
 	<div class ="field">
+		 	<br><label for="author_post">Auteur du Post: </label>
+		 	<br><input type="text" style="text-align:center; background-color:#A9A9A9"  readonly="true" id="author_post" name="author_post" cols="40" value="<%=session[:login]%>" />
+	</div>
+	<div class ="field">
 		 	<br><label for="title">Titre du Post: </label>
-		 	<br><input type="text" id="title" name="title" cols="40" />
+		 	<br><input type="text" style="text-align:center;" id="title" name="title" cols="40" />
 	</div>
 	<div class ="field">
 		<br><label for="body">Message : </label>

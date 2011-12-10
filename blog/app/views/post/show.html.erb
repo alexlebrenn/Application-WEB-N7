@@ -7,8 +7,12 @@
 
 <%= form_tag(show_path(@post.id), :method => "get", :id => 'show_post' ) do %>
 	<div class ="field">
+		 	<br><label for="author_post">Auteur du Post: </label>
+		 	<br><input type="text" style="text-align:center; background-color:#A9A9A9" readonly="true" id="author_post" name="author_post" cols="40" value="<%=@post.person.login%>" />
+	</div>	
+	<div class ="field">
 		 	<br><label for="title">Titre du Post: </label>
-		 	<br><input type="text" readonly="true" id="title" name="title" cols="40" value="<%=@post.title%>" />
+		 	<br><input type="text" style="text-align:center;" readonly="true" id="title" name="title" cols="40" value="<%=@post.title%>" />
 	</div>
 	<div class ="field">
 		<br><label for="body">Message : </label>

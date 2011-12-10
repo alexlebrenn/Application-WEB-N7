@@ -1,0 +1,31 @@
+<div class="bordure-left"></div>
+<div class="bordure-right"></div>
+
+<div class="Header">
+	<h1>Affichage du compte de l'utilisateur</h1>
+ 	<h1><%=@person.firstname %> <%=@person.name%></h1>
+</div>
+
+<%= form_tag(show_person_path(session[:id]), :method => "get", :id => 'show_person' ) do %>
+	<p style="color : green"> <%= flash[:notice] %></p>
+	<p style="color : red"> <%= flash[:error] %></p>
+	<div class ="field">
+			<br><label for="session_firstname">Firstname : *</label>
+		 	<br><input type="text" style="text-align:center;" readonly="true" id="firstname" name="firstname" size="30" value="<%=@person.firstname%>" />
+	</div>	
+	<div class ="field">
+			<br><label for="session_name">Name : *</label>
+		 	<br><input type="text" style="text-align:center;" readonly="true" id="name" name="name" size="30" value="<%=@person.name%>" />
+	</div>	
+	<div class ="field">
+			<br><label for="session_login">Login : *</label>
+		 	<br><input type="text" style="text-align:center;" readonly="true" id="login" name="login" size="30" value="<%=@person.login%>" />
+	</div>
+	<div class ="field">
+			<br><label for="session_password">Password : *</label>
+		 	<br><input  type="text" style="text-align:center;" readonly="true" id="password" name="password" size="30" value="<%=@person.password%>" />
+	</div><br>
+<% end %>
+<%= button_to "Modifier mon compte", edit_person_path(session[:id]), :method => 'get' %><br>
+<%= button_to "Supprimer mon compte", delete_person_path(session[:id]), :confirm => 'Etes-vous sûr de vouloir supprimer votre compte ?', :method => :delete %><br>
+<%= button_to "Page daccueil", posts_path, :method => "get" %>

@@ -1,0 +1,31 @@
+<div class="bordure-left"></div>
+<div class="bordure-right"></div>
+
+<div class="Header">
+	<h1>Affichage du compte de l'utilisateur</h1>
+ 	<h1><%=@person.firstname %> <%=@person.name%></h1>
+</div>
+
+<%= form_tag(show_person_path(session[:id]), :method => "put",) do %>
+	<div class ="field">
+			<br><label for="session_firstname">Firstname : *</label>
+		 	<br><input type="text" style="text-align:center;" id="firstname" name="firstname" size="30" value="<%=@person.firstname%>" />
+	</div>	
+	<div class ="field">
+			<br><label for="session_name">Name : *</label>
+		 	<br><input type="text" style="text-align:center;" id="name" name="name" size="30" value="<%=@person.name%>" />
+	</div>	
+	<div class ="field">
+			<br><label for="session_login">Login : *</label>
+		 	<br><input type="text" style="text-align:center;" id="login" name="login" size="30" value="<%=@person.login%>" />
+	</div>
+	<div class ="field">
+			<br><label for="session_password">Password : *</label>
+		 	<br><input  type="text" style="text-align:center;" id="password" name="password" size="30" value="<%=@person.password%>" />
+	</div>
+	<div class ="actions">
+		<br><br><input type="submit" name="ValidatePost" value="Valider"><br>
+	</div><br>
+<% end %>
+
+
