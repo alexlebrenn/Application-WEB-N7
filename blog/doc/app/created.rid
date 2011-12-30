@@ -1,0 +1,12 @@
+Fri, 30 Dec 2011 19:32:39 +0100
+doc/README_FOR_APP	Fri, 30 Dec 2011 19:32:20 +0100
+app/controllers/application_controller.rb	Wed, 28 Dec 2011 11:11:29 +0100
+app/controllers/post_controller.rb	Wed, 28 Dec 2011 15:31:43 +0100
+app/controllers/people_controller.rb	Fri, 30 Dec 2011 13:06:14 +0100
+app/controllers/comments_controller.rb	Fri, 30 Dec 2011 12:32:20 +0100
+app/helpers/post_helper.rb	Fri, 04 Nov 2011 09:39:07 +0100
+app/helpers/application_helper.rb	Fri, 04 Nov 2011 09:17:28 +0100
+app/helpers/comments_helper.rb	Sat, 19 Nov 2011 16:36:29 +0100
+app/models/post.rb	Wed, 28 Dec 2011 10:27:24 +0100
+app/models/person.rb	Sat, 03 Dec 2011 15:30:49 +0100
+app/models/comment.rb	Wed, 28 Dec 2011 11:28:05 +0100

@@ -1,2 +1,153 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+***********************************************************************
+*																																			*
+*												Alexandre Le Brenn														*
+*														31/12/2011																*
+*		Apprenti Ingénieur Informatique et Réseaux ENSEEIHT 3ème année		*
+*		Projet d'application Web via l'utilisation de Ruby On Rails				*
+*																																			*
+***********************************************************************
+
+Cette application WEB est un blog sécurisé permettant à des utilisateurs authentifiés ou non de réaliser plusieurs tâches.
+
+Ces tâches sont celles que l'on retrouve habituellement sur un blog, à savoir :
+
+	- Poster, consulter, modifier, supprimer des messages.
+	- Poster, consulter, modieir, supprimer des commentaires.
+
+Pour réaliser l'ensemble de ces tâches, l'utilisateur aura besoin de se créer un compte sur le blog.
+Un utulisateur non identifié n'aura quant à lui accès qu'à un nombre minimal de tâches.
+
+Voici un récapitulatif en fonction des privilèges, des actions possibles :
+
+1. Tous les utilisateurs
+	- Création d'un compte utilisateur (login, password, firstname, name) en respectant certaines contraintes (login unique, nbr de caractères minimal, etc).
+	- Visualisation et consultation (lecture seule) des messages postés.
+	- Visualisation, consultation et création de commentaires pour chaque message posté. ATTENTION : Tout commentaire créé en tant que compte non identifié ne pourra être modifié par la suite. Seul le propriétaire du post aura la possibilité de supprimer le commentaire.
+
+2. Utilisateurs identifiés
+	- Création d'un compte utilisateur (login, password, firstname, name) en respectant certaines contraintes (login unique, nbr de caractères minimal, etc).
+	- Visualisation et consultation (lecture seule) des messages postés.
+	- Visualisation, consultation et création de commentaires pour chaque message posté.
+	- Visualisation, modification et suppression de son compte personnel.
+	- Poster, modifier, supprimer des messages dont l'utilisateur en est l'auteur.
+	- Poster des commentaires.
+	- Modifier des commentaires dont l'utilisateur en est l'auteur.
+	- Supprimer des commentaires dont l'utilisateur est l'auteur du message. Cela permet ainsi de supprimer des commentaires jugés vulgaires par le propriétaire du message commenté.
+
+Pour optimiser au mieux l'ergonomie du blog, certaines fonctionnalités graphiques ont été mises en place :
+	- Affichage d'une liste de messages sur la page principale du blog
+	- Affichage d'une liste de commentaires sous chaque page de message
+	- Différenciation des noms d'auteurs (cellules grisées ou non). Pour un utilisateur non identifié, son nom d'auteur sera "Visitor => nomchoisit"
+	- Utilisateur du style css pour la mise en page
+	- Utilisation de Javascript/Ajax pour éviter de rafraichir les pages entierement pour l'authentification.
+
+L'application reste entièrement fonctionnelle même si le Javascript est désactivé par le navigateur.
+
+
+**********************************************************************************************************************************************
+**********************************************************************************************************************************************
+
+Fonctionnement du blog:
+
+**********************************************************************************************************************************************
+I. Pour commencer :
+**********************************************************************************************************************************************
+
+Mise en place des tables de la Base de Données (en devéloppement et en test)
+	- rake db:migrate
+	- rake db:migrate RAILS_ENV=test
+
+Execution de tous les tests => 148 tests OK
+	- rspec
+	
+Visualisation graphique de la page d'accueil du blog via le navigateur Web (fonctionne sous Mozilla Firefox, Internet Explorer et Google Chrome) 
+	- http://localhost:3000/posts
+
+
+**********************************************************************************************************************************************
+II. Premier cas d'utilisation : Utilisateur non loggé
+**********************************************************************************************************************************************
+
+Page d'accueil du blog:
+	- Possibilité de se logger en cliquant sur le bouton "Log in"
+	- Possibilité de se creer u ncompte personnel en cliquant sur le bouton "Create an account"
+	- Visualisation sous forme de liste de tous les posts (messages) créés par des utilisateurs authentifiés. 
+
+Visualisation d'un Post
+	- Cliquez sur Post 1.
+	- On arrive sur la page de visualisation du Post 1. Dans la partie supérieure, on peut voir le nom de l'auteur, le titre du Post et son contenu.
+	- Dans la partie inférieure, on peut visualiser la liste de commentaires associés à ce post. Chaque commentaire est identifié par un nom d'auteur et un contenu.
+	- Sur cette page, il est soit possible de visualiser un commentaire, soit d'en créer un, soit de revenir à la page d'accueil.
+	- Cliquez sur le bouton "Show" du commentaire posté par "alebrenn".
+
+Visualisation d'un commentaire
+	- On arrive sur la page d'un commentaire.
+	- Sur cette page, il est possible de visualiser entièrement le contenu du commentaire (pas possible sur la page d'avant) ainsi que le nom de son auteur.
+	- Cliquez sur le bouton "back" pour revenir à la page précèdente.
+
+Ajout d'un commentaire
+	- Cliquez sur le bouton "Add a new comment" pour ajouter un commentaire en tant que personne non identifiée (Visitor)
+	- Veuillez compléter le champs Author en mettant par exemple (Visitor => Pierre). NE REMPLISSEZ PAS le champs contenu et appuyer sur le bouton "Create".
+	- Visualiser le message d'erreur et remplissez alors le champs en question en respectant la contrainte du nombre minimal de caractères.
+	- Appuyer sur le bouton "Create".
+	- Votre commentaire est affiché. Un message d'information vous informe du bon enregistrement de votre commentaire.
+	- Cliquez sur "Back" pour visualiser votre commentaire dans la liste.
+	- Cliquez enfin sur "Home Page" pour revenir à la page d'accueil.
+
+
+**********************************************************************************************************************************************
+III. Deuxième cas d'utilisation : Utilisateur loggé
+**********************************************************************************************************************************************
+
+Authentification
+	- Cliquez sur le bouton "Log in". Un formulaire apparait grâce au Javascript.
+	- Remplissez les champs suivants => Login : alebrenn			Password : zidane
+	- Cliquez enfin sur "Login".
+	- Vous êtes authentifié. Un message d'information vous informe que l'authentification a été faite avec succès. Un message de bienvenue, suivi de votre prénom vous
+permet de constater que vous êtes bien identifié et reconnu. Deux boutons sont apparus. My account permet de visualier les paramètres de votre compte. Disconnect permet de se déconnecter.
+
+Modification de la page
+	- D'autres boutons sont apparus. Sous le Post 1, les boutons "Edit" et "Delete". En effet, etant l'auteur de ce post, vous avez la possibilité de le modifier et de le supprimer. N'étant pas l'auteur du post 2, vous ne pouvez faire aucune action dessus, si ce n'est le visualiser évidemment.
+Vous avez la possibilité d'ajouter un nouveau Post en cliquant sur le bouton Add a new Post.
+
+Ajout d'un nouveau Post
+	- Cliquer sur le bouton "Add a new Post".
+	- Le champs author est prérempli et vous ne pouvez le modifier. Ne remplissez aucun des autres champs et constatez les messages d'erreurs.
+	- Remplissez les champs en respectant les contraintes imposées et cliquez sur "Create".
+	- Vous êtes redirigés sur la page d'accueil et votre Post apparait. Vous avez ainsi la possibilité de le remodifier ou de le supprimer.
+
+Modification d'un Post
+	- Modifier le en cliquant sur Edit. Modifier les champs et valider en appuyant sur "Modify". Un message d'information vous préviens que la modification a été effectuée avec succès si vous avez respecté les contraintes.
+	- Cliquez sur Home Page pour revenir à la Page d'accueil.
+
+Suppression d'un Post
+	- Supprimer le Post que vous venez de créer en cliquant sur le bouton "Delete".
+	- Confirmez la suppression. Votre message disparait.
+
+Modification/Suppression d'un commentaire
+	- Cliquez sur Post 1 (Post dont on est l'auteur).
+	- Il est possible de visualiser et de supprimer tous les commentaires désirés. Seul le commentaire dont on est l'auteur peut être modifié.
+	- Cliquez sur Edit pour modifier le commentaire. (meme procedure que pour les posts)
+	- Creez un commentaire et tenter de le supprimer.
+
+
+Visualisation des paramètres du compte
+	- retournez à la page d'accueil.
+	- Cliquez sur le bouton "Disconnect pour vous deconnecter.
+	- Creer vous un compte en cliquant sur "Create an account"
+	- Ne remplissez aucun champs et visualer les messages d'erreurs
+	- Remplissez alors les champs en respectant les contraintes.
+
+Une fois le compte créé, authentifié vous avec.
+Visualier, modifier et supprimer ce compte.
+
+
+
+Autre compte possible pour effectuer des tests avec le Post 2 => Login : justin       Password : bridou	 
+
+**********************************************************************************************************************************************
+**********************************************************************************************************************************************
+

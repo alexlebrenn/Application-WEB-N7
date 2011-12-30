@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>README_FOR_APP</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body class="file">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="../Comment.html">Comment</a>
+  
+    <li><a href="../CommentsController.html">CommentsController</a>
+  
+    <li><a href="../CommentsHelper.html">CommentsHelper</a>
+  
+    <li><a href="../PeopleController.html">PeopleController</a>
+  
+    <li><a href="../Person.html">Person</a>
+  
+    <li><a href="../Post.html">Post</a>
+  
+    <li><a href="../PostController.html">PostController</a>
+  
+    <li><a href="../PostHelper.html">PostHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation" class="description">
+  
+<p>Use this README file to introduce your application and point to useful
+places in the API for learning more. Run “rake doc:app” to generate API
+documentation for your models, controllers, helpers, and libraries.</p>
+
+<p>***********************************************************************</p>
+<ul><li>
+<p>*</p>
+</li><li>
+<p>Alexandre Le Brenn                                                         
+*</p>
+</li><li>
+<p>31/12/2011                                                                 
+*</p>
+</li><li>
+<p>Apprenti Ingénieur Informatique et Réseaux ENSEEIHT 3ème année          *</p>
+</li><li>
+<p>Projet d’application Web via l’utilisation de Ruby On Rails                
+*</p>
+</li><li>
+<p>*</p>
+</li></ul>
+
+<p>***********************************************************************</p>
+
+<p>Cette application WEB est un blog sécurisé permettant à des utilisateurs
+authentifiés ou non de réaliser plusieurs tâches.</p>
+
+<p>Ces tâches sont celles que l’on retrouve habituellement sur un blog, à
+savoir :</p>
+
+<pre>- Poster, consulter, modifier, supprimer des messages.
+- Poster, consulter, modieir, supprimer des commentaires.</pre>
+
+<p>Pour réaliser l’ensemble de ces tâches, l’utilisateur aura besoin de se
+créer un compte sur le blog. Un utulisateur non identifié n’aura quant à
+lui accès qu’à un nombre minimal de tâches.</p>
+
+<p>Voici un récapitulatif en fonction des privilèges, des actions possibles :</p>
+<ol><li>
+<p>Tous les utilisateurs</p>
+
+<pre>- Création d'un compte utilisateur (login, password, firstname, name) en respectant certaines contraintes (login unique, nbr de caractères minimal, etc).
+- Visualisation et consultation (lecture seule) des messages postés.
+- Visualisation, consultation et création de commentaires pour chaque message posté. ATTENTION : Tout commentaire créé en tant que compte non identifié ne pourra être modifié par la suite. Seul le propriétaire du post aura la possibilité de supprimer le commentaire.</pre>
+</li><li>
+<p>Utilisateurs identifiés</p>
+
+<pre>- Création d'un compte utilisateur (login, password, firstname, name) en respectant certaines contraintes (login unique, nbr de caractères minimal, etc).
+- Visualisation et consultation (lecture seule) des messages postés.
+- Visualisation, consultation et création de commentaires pour chaque message posté.
+- Visualisation, modification et suppression de son compte personnel.
+- Poster, modifier, supprimer des messages dont l'utilisateur en est l'auteur.
+- Poster des commentaires.
+- Modifier des commentaires dont l'utilisateur en est l'auteur.
+- Supprimer des commentaires dont l'utilisateur est l'auteur du message. Cela permet ainsi de supprimer des commentaires jugés vulgaires par le propriétaire du message commenté.</pre>
+</li></ol>
+
+<p>Pour optimiser au mieux l’ergonomie du blog, certaines fonctionnalités
+graphiques ont été mises en place :</p>
+
+<pre class="ruby"><span class="ruby-operator">-</span> <span class="ruby-constant">Affichage</span> <span class="ruby-identifier">d</span><span class="ruby-string">'une liste de messages sur la page principale du blog
+- Affichage d'</span><span class="ruby-identifier">une</span> <span class="ruby-identifier">liste</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">commentaires</span> <span class="ruby-identifier">sous</span> <span class="ruby-identifier">chaque</span> <span class="ruby-identifier">page</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">message</span>
+<span class="ruby-operator">-</span> <span class="ruby-constant">Différenciation</span> <span class="ruby-identifier">des</span> <span class="ruby-identifier">noms</span> <span class="ruby-identifier">d</span><span class="ruby-string">'auteurs (cellules grisées ou non). Pour un utilisateur non identifié, son nom d'</span><span class="ruby-identifier">auteur</span> <span class="ruby-identifier">sera</span> <span class="ruby-string">&quot;Visitor =&gt; nomchoisit&quot;</span>
+<span class="ruby-operator">-</span> <span class="ruby-constant">Utilisateur</span> <span class="ruby-identifier">du</span> <span class="ruby-identifier">style</span> <span class="ruby-identifier">css</span> <span class="ruby-identifier">pour</span> <span class="ruby-identifier">la</span> <span class="ruby-identifier">mise</span> <span class="ruby-identifier">en</span> <span class="ruby-identifier">page</span>
+<span class="ruby-operator">-</span> <span class="ruby-constant">Utilisation</span> <span class="ruby-identifier">de</span> <span class="ruby-constant">Javascript</span><span class="ruby-operator">/</span><span class="ruby-constant">Ajax</span> <span class="ruby-identifier">pour</span> <span class="ruby-identifier">éviter</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">rafraichir</span> <span class="ruby-identifier">les</span> <span class="ruby-identifier">pages</span> <span class="ruby-identifier">entierement</span> <span class="ruby-identifier">pour</span> <span class="ruby-identifier">l</span><span class="ruby-string">'authentification.
+</span></pre>
+
+<p>L’application reste entièrement fonctionnelle même si le Javascript est
+désactivé par le navigateur.</p>
+
+<p>**********************************************************************************************************************************************
+**********************************************************************************************************************************************</p>
+
+<p>Fonctionnement du blog:</p>
+
+<p>**********************************************************************************************************************************************</p>
+<ol style="list-style-type: upper-alpha"><li>
+<p>Pour commencer :</p>
+</li></ol>
+
+<p>**********************************************************************************************************************************************</p>
+
+<p>Mise en place des tables de la Base de Données (en devéloppement et en
+test)</p>
+
+<pre>- rake db:migrate
+- rake db:migrate RAILS_ENV=test</pre>
+
+<p>Execution de tous les tests =&gt; 148 tests OK</p>
+
+<pre>- rspec</pre>
+
+<p>Visualisation graphique de la page d’accueil du blog via le navigateur Web
+(fonctionne sous Mozilla Firefox, Internet Explorer et Google Chrome)</p>
+
+<pre>- http://localhost:3000/posts</pre>
+
+<p>**********************************************************************************************************************************************
+II. Premier cas d’utilisation : Utilisateur non loggé
+**********************************************************************************************************************************************</p>
+
+<p>Page d’accueil du blog:</p>
+
+<pre>- Possibilité de se logger en cliquant sur le bouton &quot;Log in&quot;
+- Possibilité de se creer u ncompte personnel en cliquant sur le bouton &quot;Create an account&quot;
+- Visualisation sous forme de liste de tous les posts (messages) créés par des utilisateurs authentifiés.</pre>
+
+<p>Visualisation d’un <a href="../Post.html">Post</a></p>
+
+<pre>- Cliquez sur Post 1.
+- On arrive sur la page de visualisation du Post 1. Dans la partie supérieure, on peut voir le nom de l'auteur, le titre du Post et son contenu.
+- Dans la partie inférieure, on peut visualiser la liste de commentaires associés à ce post. Chaque commentaire est identifié par un nom d'auteur et un contenu.
+- Sur cette page, il est soit possible de visualiser un commentaire, soit d'en créer un, soit de revenir à la page d'accueil.
+- Cliquez sur le bouton &quot;Show&quot; du commentaire posté par &quot;alebrenn&quot;.</pre>
+
+<p>Visualisation d’un commentaire</p>
+
+<pre>- On arrive sur la page d'un commentaire.
+- Sur cette page, il est possible de visualiser entièrement le contenu du commentaire (pas possible sur la page d'avant) ainsi que le nom de son auteur.
+- Cliquez sur le bouton &quot;back&quot; pour revenir à la page précèdente.</pre>
+
+<p>Ajout d’un commentaire</p>
+
+<pre class="ruby"><span class="ruby-operator">-</span> <span class="ruby-constant">Cliquez</span> <span class="ruby-identifier">sur</span> <span class="ruby-identifier">le</span> <span class="ruby-identifier">bouton</span> <span class="ruby-string">&quot;Add a new comment&quot;</span> <span class="ruby-identifier">pour</span> <span class="ruby-identifier">ajouter</span> <span class="ruby-identifier">un</span> <span class="ruby-identifier">commentaire</span> <span class="ruby-identifier">en</span> <span class="ruby-identifier">tant</span> <span class="ruby-identifier">que</span> <span class="ruby-identifier">personne</span> <span class="ruby-identifier">non</span> <span class="ruby-identifier">identifiée</span> (<span class="ruby-constant">Visitor</span>)
+<span class="ruby-operator">-</span> <span class="ruby-constant">Veuillez</span> <span class="ruby-identifier">compléter</span> <span class="ruby-identifier">le</span> <span class="ruby-identifier">champs</span> <span class="ruby-constant">Author</span> <span class="ruby-identifier">en</span> <span class="ruby-identifier">mettant</span> <span class="ruby-identifier">par</span> <span class="ruby-identifier">exemple</span> (<span class="ruby-constant">Visitor</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Pierre</span>). <span class="ruby-constant">NE</span> <span class="ruby-constant">REMPLISSEZ</span> <span class="ruby-constant">PAS</span> <span class="ruby-identifier">le</span> <span class="ruby-identifier">champs</span> <span class="ruby-identifier">contenu</span> <span class="ruby-identifier">et</span> <span class="ruby-identifier">appuyer</span> <span class="ruby-identifier">sur</span> <span class="ruby-identifier">le</span> <span class="ruby-identifier">bouton</span> <span class="ruby-string">&quot;Create&quot;</span>.
+<span class="ruby-operator">-</span> <span class="ruby-constant">Visualiser</span> <span class="ruby-identifier">le</span> <span class="ruby-identifier">message</span> <span class="ruby-identifier">d</span><span class="ruby-string">'erreur et remplissez alors le champs en question en respectant la contrainte du nombre minimal de caractères.
+- Appuyer sur le bouton &quot;Create&quot;.
+- Votre commentaire est affiché. Un message d'</span><span class="ruby-identifier">information</span> <span class="ruby-identifier">vous</span> <span class="ruby-identifier">informe</span> <span class="ruby-identifier">du</span> <span class="ruby-identifier">bon</span> <span class="ruby-identifier">enregistrement</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">votre</span> <span class="ruby-identifier">commentaire</span>.
+<span class="ruby-operator">-</span> <span class="ruby-constant">Cliquez</span> <span class="ruby-identifier">sur</span> <span class="ruby-string">&quot;Back&quot;</span> <span class="ruby-identifier">pour</span> <span class="ruby-identifier">visualiser</span> <span class="ruby-identifier">votre</span> <span class="ruby-identifier">commentaire</span> <span class="ruby-identifier">dans</span> <span class="ruby-identifier">la</span> <span class="ruby-identifier">liste</span>.
+<span class="ruby-operator">-</span> <span class="ruby-constant">Cliquez</span> <span class="ruby-identifier">enfin</span> <span class="ruby-identifier">sur</span> <span class="ruby-string">&quot;Home Page&quot;</span> <span class="ruby-identifier">pour</span> <span class="ruby-identifier">revenir</span> <span class="ruby-identifier">à</span> <span class="ruby-identifier">la</span> <span class="ruby-identifier">page</span> <span class="ruby-identifier">d</span><span class="ruby-string">'accueil.
+</span></pre>
+
+<p>**********************************************************************************************************************************************
+III. Deuxième cas d’utilisation : Utilisateur loggé
+**********************************************************************************************************************************************</p>
+
+<p>Authentification</p>
+
+<pre class="ruby"><span class="ruby-operator">-</span> <span class="ruby-constant">Cliquez</span> <span class="ruby-identifier">sur</span> <span class="ruby-identifier">le</span> <span class="ruby-identifier">bouton</span> <span class="ruby-string">&quot;Log in&quot;</span>. <span class="ruby-constant">Un</span> <span class="ruby-identifier">formulaire</span> <span class="ruby-identifier">apparait</span> <span class="ruby-identifier">grâce</span> <span class="ruby-identifier">au</span> <span class="ruby-constant">Javascript</span>.
+<span class="ruby-operator">-</span> <span class="ruby-constant">Remplissez</span> <span class="ruby-identifier">les</span> <span class="ruby-identifier">champs</span> <span class="ruby-identifier">suivants</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Login</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">alebrenn</span>                    <span class="ruby-constant">Password</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">zidane</span>
+<span class="ruby-operator">-</span> <span class="ruby-constant">Cliquez</span> <span class="ruby-identifier">enfin</span> <span class="ruby-identifier">sur</span> <span class="ruby-string">&quot;Login&quot;</span>.
+<span class="ruby-operator">-</span> <span class="ruby-constant">Vous</span> <span class="ruby-identifier">êtes</span> <span class="ruby-identifier">authentifié</span>. <span class="ruby-constant">Un</span> <span class="ruby-identifier">message</span> <span class="ruby-identifier">d</span><span class="ruby-string">'information vous informe que l'</span><span class="ruby-identifier">authentification</span> <span class="ruby-identifier">a</span> <span class="ruby-identifier">été</span> <span class="ruby-identifier">faite</span> <span class="ruby-identifier">avec</span> <span class="ruby-identifier">succès</span>. <span class="ruby-constant">Un</span> <span class="ruby-identifier">message</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">bienvenue</span>, <span class="ruby-identifier">suivi</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">votre</span> <span class="ruby-identifier">prénom</span> <span class="ruby-identifier">vous</span>
+</pre>
+
+<p>permet de constater que vous êtes bien identifié et reconnu. Deux boutons
+sont apparus. My account permet de visualier les paramètres de votre
+compte. Disconnect permet de se déconnecter.</p>
+
+<p>Modification de la page</p>
+
+<pre>- D'autres boutons sont apparus. Sous le Post 1, les boutons &quot;Edit&quot; et &quot;Delete&quot;. En effet, etant l'auteur de ce post, vous avez la possibilité de le modifier et de le supprimer. N'étant pas l'auteur du post 2, vous ne pouvez faire aucune action dessus, si ce n'est le visualiser évidemment.</pre>
+
+<p>Vous avez la possibilité d’ajouter un nouveau <a
+href="../Post.html">Post</a> en cliquant sur le bouton Add a new <a
+href="../Post.html">Post</a>.</p>
+
+<p>Ajout d’un nouveau <a href="../Post.html">Post</a></p>
+
+<pre>- Cliquer sur le bouton &quot;Add a new Post&quot;.
+- Le champs author est prérempli et vous ne pouvez le modifier. Ne remplissez aucun des autres champs et constatez les messages d'erreurs.
+- Remplissez les champs en respectant les contraintes imposées et cliquez sur &quot;Create&quot;.
+- Vous êtes redirigés sur la page d'accueil et votre Post apparait. Vous avez ainsi la possibilité de le remodifier ou de le supprimer.</pre>
+
+<p>Modification d’un <a href="../Post.html">Post</a></p>
+
+<pre>- Modifier le en cliquant sur Edit. Modifier les champs et valider en appuyant sur &quot;Modify&quot;. Un message d'information vous préviens que la modification a été effectuée avec succès si vous avez respecté les contraintes.
+- Cliquez sur Home Page pour revenir à la Page d'accueil.</pre>
+
+<p>Suppression d’un <a href="../Post.html">Post</a></p>
+
+<pre>- Supprimer le Post que vous venez de créer en cliquant sur le bouton &quot;Delete&quot;.
+- Confirmez la suppression. Votre message disparait.</pre>
+
+<p>Modification/Suppression d’un commentaire</p>
+
+<pre>- Cliquez sur Post 1 (Post dont on est l'auteur).
+- Il est possible de visualiser et de supprimer tous les commentaires désirés. Seul le commentaire dont on est l'auteur peut être modifié.
+- Cliquez sur Edit pour modifier le commentaire. (meme procedure que pour les posts)
+- Creez un commentaire et tenter de le supprimer.</pre>
+
+<p>Visualisation des paramètres du compte</p>
+
+<pre>- retournez à la page d'accueil.
+- Cliquez sur le bouton &quot;Disconnect pour vous deconnecter.
+- Creer vous un compte en cliquant sur &quot;Create an account&quot;
+- Ne remplissez aucun champs et visualer les messages d'erreurs
+- Remplissez alors les champs en respectant les contraintes.</pre>
+
+<p>Une fois le compte créé, authentifié vous avec. Visualier, modifier et
+supprimer ce compte.</p>
+
+<p>Autre compte possible pour effectuer des tests avec le <a
+href="../Post.html">Post</a> 2 =&gt; Login : justin       Password : bridou</p>
+
+<p>**********************************************************************************************************************************************
+**********************************************************************************************************************************************</p>
+
+</div>
+
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
