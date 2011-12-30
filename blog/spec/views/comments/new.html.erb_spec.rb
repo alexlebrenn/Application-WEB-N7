@@ -1,23 +1,31 @@
 require 'spec_helper'
 
 describe "comments/new.html.erb" do
-  before(:each) do
-		@post = Post.create(:title => "Post11", :body => "bla bla")
-		@comment = Comment.create(:author => "Alex", :body => "comment1", :id => 1, :post_id => @post.id)
-  end
-
-	it "displays a form to create a new comment" do
+	before(:each) do
+		@person = Person.create(:login => "alebrenn", :password => "zidane", :name => "lebrenn", :firstname => "alex", :id => "1")
+		@post = Post.create(:person_id => @person.id, :title => "post1", :body => "body1")
+		@comment = Comment.create(:author => "alex", :body => "comment1", :post_id =>@post.id)	
 		render
-		rendered.should =~ /author/
-		rendered.should =~ /body/
-
-		rendered.should have_content('Ajout d\'un commentaire')
-		rendered.should have_content('Auteur')
-		rendered.should have_content('Contenu')
-		rendered.should have_selector("form", :method => "POST")
-		rendered.should have_selector("input",:type => "text", :name => "author")
-    rendered.should have_selector("textarea", :name => "body")
-   	rendered.should have_selector("input", :type => "submit", :name => "Create Comment")
-		rendered.should have_button('Retour')
 	end
+
+	it "displays the title of the page " do
+		rendered.should have_content("Creating a new Comment")
+	end
+
+	it "displays a textfield and a textarea" do
+		rendered.should have_content('Author :')
+		rendered.should have_content('Body :')
+   	rendered.should have_selector("input", :type => "text")    
+   	rendered.should have_selector("textarea") 
+	end  
+
+  it "displays a form to create a new comment" do
+   	rendered.should have_selector("form",:method => "POST")
+   	rendered.should have_selector("input", :type => "submit", :name => "Create", :href => post_comment_path(@post.id, @comment.id))   	
+  end
+    
+  it "should have a button to back to the preivous page" do
+		rendered.should have_selector("input", :type => "submit", :name => "back", :href => show_path(@post.id)) 
+		rendered.should have_button("Back")
+	end	
 end

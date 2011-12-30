@@ -1,13 +1,15 @@
-<%= form_for([@comment.post, @comment]) do |f| %>
-    <div class="field">
-    <%= f.label :Auteur %><br />
-    <%= f.text_field :author %>
-  </div>
-  <div class="field">
-    <%= f.label :Contenu %><br />
-    <%= f.text_area :body %>
-  </div>
-  <div class="actions">
-    <br><%= f.submit %>
-  </div>
+<%= form_tag(create_post_comment_path(@comment.post_id), :method => "post", :id => 'new_comment' ) do %>
+	<div class="field">	
+		<br><label for="author_comment">Author : </label><br>
+		<% if session[:login] %>	 	
+	 		<input type="text" style="text-align:center; background-color:#A9A9A9" readonly="true" id="comment_author" name="comment[author]" cols="40" value="<%=session[:login]%>"/>
+		<% else %>
+			<input type="text" style="text-align:center" id="comment_author" name="comment[author]" cols="40" value="Visitor => "/>
+		<% end %>
+	</div>
+	<div class ="field">
+	 	<br><label for="body">Body : </label>
+	 	<br><textarea id="comment_body" name="comment[body]" rows="10" cols="40"></textarea>
+	</div><br>
+	<%= submit_tag("Create") %>
 <% end %>

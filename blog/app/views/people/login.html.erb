@@ -1,5 +1,6 @@
 <p style="color : green"> <%= flash[:notice] %></p>
+<p style="color : red"> <%= flash[:error] %></p>
 
 <%= render 'login' %>
 
-<%= button_to 'Page d\'accueil', posts_path %>
+<%= button_to 'Home Page', posts_path %>

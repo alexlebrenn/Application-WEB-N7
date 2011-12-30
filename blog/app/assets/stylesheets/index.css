@@ -10,10 +10,19 @@ body {
 /* Affichage liste des posts */
 div.middle {
   text-align: center;
-  border: 6px ridge black ;
-	position:relative;
-  left:24em;
-  width:40em;
+  border: 4px ridge black ;
+  margin-left: 30%;
+  margin-right: 30%;
+  height:center;
+}
+
+/* Affichage liste des comments pour un post associé */
+div.comment {
+  text-align: center;
+  border: 2px ridge black ;
+  margin-left: 30%;
+  margin-right: 30%;
+	padding: 0.5em; 
   height:center;
 }
 
@@ -28,9 +37,10 @@ div.bordure-top {
 
 /* Bannière gauche */
 div.bordure-left, div.bordure-right {
+	background-color: black;
   background-image: url(left.png);
   background-position: center;
-  background-repeat: repeat-y;
+  background-repeat: no-repeat;
 	position: absolute; 
 	top: 0; 
 	left: 0; 

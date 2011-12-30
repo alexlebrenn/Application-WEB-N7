@@ -1,7 +1,5 @@
-<%= form_tag login_person_path do %>  
-  <label for="people_login">Login</label>
-  <%= text_field 'people', 'login', :size => 12  %>
-  <label for="people_password">Password</label>
-  <%= password_field 'people', 'password', :size => 12 %>
-  <%= submit_tag "Login" %>
+<%= form_tag login_person_path do %>
+	Login :  <input type="text" id="login" name="login" /> &nbsp &nbsp
+	Password : <input type="password" id="password" name="password" /> &nbsp &nbsp
+	<%= submit_tag "Login" %>
 <% end %>

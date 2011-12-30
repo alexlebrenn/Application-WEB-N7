@@ -2,13 +2,14 @@
 <div class="bordure-right"></div>
 
 <div class="Header">
-	<h1>Affichage du compte de l'utilisateur</h1>
+	<h1>User Account</h1>
  	<h1><%=@person.firstname %> <%=@person.name%></h1>
 </div>
 
+<p style="color : green"> <%= flash[:notice] %></p>
+<p style="color : red"> <%= flash[:error] %></p>
+
 <%= form_tag(show_person_path(session[:id]), :method => "get", :id => 'show_person' ) do %>
-	<p style="color : green"> <%= flash[:notice] %></p>
-	<p style="color : red"> <%= flash[:error] %></p>
 	<div class ="field">
 			<br><label for="session_firstname">Firstname : *</label>
 		 	<br><input type="text" style="text-align:center;" readonly="true" id="firstname" name="firstname" size="30" value="<%=@person.firstname%>" />
@@ -23,9 +24,10 @@
 	</div>
 	<div class ="field">
 			<br><label for="session_password">Password : *</label>
-		 	<br><input  type="text" style="text-align:center;" readonly="true" id="password" name="password" size="30" value="<%=@person.password%>" />
+		 	<br><input  type="password" style="text-align:center;" readonly="true" id="password" name="password" size="30" value="<%=@person.password%>" />
 	</div><br>
 <% end %>
-<%= button_to "Modifier mon compte", edit_person_path(session[:id]), :method => 'get' %><br>
-<%= button_to "Supprimer mon compte", delete_person_path(session[:id]), :confirm => 'Etes-vous sûr de vouloir supprimer votre compte ?', :method => :delete %><br>
-<%= button_to "Page daccueil", posts_path, :method => "get" %>
+
+<%= button_to "Edit", edit_person_path(session[:id]), :method => 'get' %>
+<%= button_to "Delete", delete_person_path(session[:id]), :confirm => 'Are you sure you want to delete this account ?', :method => :delete %><br>
+<%= button_to "Home Page", posts_path, :method => "get" %>

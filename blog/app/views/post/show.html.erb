@@ -2,37 +2,47 @@
 <div class="bordure-right"></div>
 
 <div class="Header">
-	<h1>Affichage du Post n°<%=@post.id%></h1>
+	<h1> Post n°<%=@post.id%></h1>
 </div>
 
-<%= form_tag(show_path(@post.id), :method => "get", :id => 'show_post' ) do %>
+<p style="color : green"> <%= flash[:notice] %></p>
+<p style="color : red"> <%= flash[:error] %></p>
+
+<%= form_tag(show_path(@post.id), :method => "get") do %>
 	<div class ="field">
-		 	<br><label for="author_post">Auteur du Post: </label>
-		 	<br><input type="text" style="text-align:center; background-color:#A9A9A9" readonly="true" id="author_post" name="author_post" cols="40" value="<%=@post.person.login%>" />
-	</div>	
-	<div class ="field">
-		 	<br><label for="title">Titre du Post: </label>
-		 	<br><input type="text" style="text-align:center;" readonly="true" id="title" name="title" cols="40" value="<%=@post.title%>" />
+	 	<label for="author_post">Author : </label>
+		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+		<label for="title">Title : </label>
+	 	<br><input type="text" style="text-align:center; background-color:#A9A9A9" readonly="true" id="author_post" name="author_post" cols="40" value="<%=@post.person.login%>" />
+	 	<input type="text" style="text-align:center;" readonly="true" id="title" name="title" cols="40" value="<%=@post.title%>" />
 	</div>
 	<div class ="field">
-		<br><label for="body">Message : </label>
-		<br><textarea readonly name="body" id="body" rows="10" cols="40"><%=@post.body%></textarea>
+		<br><label for="body">Body : </label>
+		<br><textarea readonly name="body" id="body" rows="5" cols="40"><%=@post.body%></textarea>
 	</div><br>
 <% end %>
 
 
-<h1>Commentaires</h1>
+<h1>Comments </h1>
 <% @post.comments.each do |comment| %>
-	<div class ="field">
-	 	<label for="author">Auteur : &nbsp </label>
-	 	<input type="text_comment" readonly="true" id="author" name="author" cols="10" value="<%=comment.author%>"/>
-		&nbsp <%= link_to "Modifier", edit_post_comment_path(comment.post.id, comment.id), :id => "modify_comment#{comment.id}"%>
-		<br><%= link_to "Contenu :", post_comment_path(comment.post,comment.id), :id => "comment#{comment.id}"%>
-		<input type="text_comment" readonly="true" id="comment_body" name="comment_body" cols="10" value="<%=comment.body%>"/>
-		&nbsp <%= link_to "Supprimer", delete_post_comment_path(comment.post.id, comment.id), :id => "delete_comment#{comment.id}", :comment_id => comment.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Commentaire ?', :method => :delete %>
+	<div class ="comment">
+	 	<label for="author">Author : &nbsp </label>
+	 	<input type="text_comment" style="background-color:#A9A9A9" readonly="true" id="author" name="author" cols="10" value="<%=comment.author%>"/>
+	 	<label for="comment_body">&nbsp &nbsp Body : &nbsp </label>
+		<input type="text_comment" style="background-color:#A9A9A9" readonly="true" id="comment_body" name="comment_body" cols="10" value="<%=comment.body%>"/>
+		
+		<%= button_to "Show", post_comment_path(comment.post,comment.id), :id => "comment#{comment.id}", :method => :get %>
+		
+		<% if (session[:id] == comment.person_id) and (session[:id] != nil) %>
+			<%= button_to "Edit", edit_post_comment_path(comment.post.id, comment.id), :id => "modify_comment#{comment.id}", :method => :get%>
+		<% end %>
+		
+		<% if ((session[:id] == comment.person_id) and (session[:id] != nil)) or ((session[:id] == @post.person_id) and (comment.person_id == nil)) %>
+			<%= button_to "Delete", delete_post_comment_path(comment.post.id, comment.id), :id => "delete_comment#{comment.id}", :comment_id => comment.id, :confirm => 				'Are you sure you want to delete the comment ?', :method => :delete %>
+		<% end %>	
 	</div><br>
 <% end %>
 
-<%= button_to 'Ajouter un commentaire', new_post_comment_path, :method => "get" %>
+<%= button_to 'Add a new comment', new_post_comment_path, :method => "get" %>
 
-<%= button_to "Page daccueil", posts_path, :method => "get" %><br>
+<%= button_to "Home Page", posts_path, :method => "get" %><br>

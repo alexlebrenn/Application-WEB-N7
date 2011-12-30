@@ -1,21 +1,44 @@
 require 'spec_helper'
 
-describe "comments/show.html.erb" do
+describe "people/show.html.erb" do
   before(:each) do
-		@post = Post.create(:title => "Post11", :body => "bla bla")
-		@comment = Comment.create(:author => "Alex", :body => "comment1", :id => 1, :post_id => @post.id)
+		@person = stub_model(Person, :name => "nom", :firstname => "prenom", :password => "Password", :login => "Login")
+		session[:id] = @person.id 
+		render
   end
 
-  it "displays the comment author with its body" do
-    render
-
-		rendered.should have_content('Affichage du commentaire')
-		rendered.should have_content('Auteur :')
-    rendered.should have_content("Contenu : ")
-    rendered.should have_content("comment1")
-		rendered.should have_selector("input",:type => "text", :name => "author")
-    rendered.should have_selector("textarea", :name => "body")
-		rendered.should have_button('Modifier')
-		rendered.should have_button('Retour')
+	it "displays the title of the page" do
+		rendered.should have_content('User Account')
 	end
+
+	it "displays parameters of a Person" do
+		rendered.should have_content('Firstname :')
+		rendered.should have_content('name :')
+		rendered.should have_content('Login :')
+		rendered.should have_content('Password :')
+		rendered.should have_selector("input",:type => "text", :name => "firstname", :content => @person.firstname)
+		rendered.should have_selector("input",:type => "text", :name => "name", :content => @person.name)
+	end
+	
+	it "should have textfield for parameters of a Person" do
+		rendered.should have_selector("input",:type => "text", :name => "nom")
+		rendered.should have_selector("input",:type => "text", :firstname => "prenom")
+		rendered.should have_selector("input",:type => "text", :password => "Password")        
+		rendered.should have_selector("input",:type => "text", :login => "Login")
+	end
+
+	it "should have a button to modify user account" do
+		rendered.should have_selector("input", :type => "submit", :name => "Edit", :href => edit_person_path(@person.id)) 
+		rendered.should have_button("Edit")
+	end
+
+	it "should have a button to delete user account" do
+		rendered.should have_selector("input", :type => "submit", :name => "Delete", :href => posts_path) 
+		rendered.should have_button("Delete")
+	end
+
+	it "should have a button to back to the Home Page" do
+		rendered.should have_selector("input", :type => "submit", :name => "Home Page", :href => posts_path) 
+		rendered.should have_button("Home Page")
+	end	
 end

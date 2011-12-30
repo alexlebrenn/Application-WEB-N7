@@ -6,37 +6,38 @@
 <div class="bordure-top"></div>
 <div class="bordure-left"></div>
 <div class="bordure-right"></div>
+
 <div class="authentification">
-<h1>	Bienvenue <%= session[:firstname] %> </h1>
+	<p style="color : green"> <%= flash[:notice] %></p>
+	<p style="color : red"> <%= flash[:error] %></p>
+	<h1>	Welcome <%= session[:firstname] %> </h1>
 	<% if !session[:login] %>
-		<%= link_to "S'authentifier", login_person_path, :method => 'get' , :remote => true%>
-		<p style="color : green"> <%= flash[:notice] %></p>
-		<p style="color : red"> <%= flash[:error] %></p>
- 		<%= button_to "Créer un compte", new_person_path, :method => 'get' %>
+		<%= button_to "Log in", login_person_path, :method => 'get' , :remote => true%><br>
+ 		<%= button_to "Create an account", new_person_path, :method => 'get' %>
 	<% else %>
-		<%= button_to "Mon compte", show_person_path(session[:id]), :method => 'get'%>
-		<%= button_to "Se déconnecter", logout_person_path, :method => 'get'%>
-		<p style="color : green"> <%= flash[:notice] %></p>
+		<%= button_to "My account", show_person_path(session[:id]), :method => 'get'%>
+		<%= button_to "Disconnect", logout_person_path(session[:id]), :method => 'get'%>
 	<% end %>
 </div>
+
 <body>
 	<%= yield %>
 	<h1>
-		Affichage de la liste des Posts
+		Post list display
 	</h1>
 	
 	<div class="middle">
 		<% @posts.each do |p| %>
 			<hr><li>
-				<%= link_to p.title, show_path(p.id)%> <br>
+				<%= link_to p.title, show_path(p.id), :id => "show_post#{p.id}"%> <br>
 				<% if (session[:id] == p.person_id) and (session[:id] != nil) %>
-					<br><%= button_to "Modifier", receive_path(p.id), :method => :receive %>
-					<%= button_to "Supprimer", delete_path(p.id), :id => p.id, :confirm => 'Etes-vous sûr de vouloir supprimer le Post ?', :method => :delete %>
+					<br><%= button_to "Edit", receive_path(p.id), :method => :receive, :id => "modify_post#{p.id}" %>
+					<%= button_to "Delete", delete_path(p.id), :id => p.id, :confirm => 'Are you sure you want to delete Post ?', :method => :delete %>
 				<% end %>
 			</li><hr>
 		<% end %>
 		<% if session[:login] %>
-			<br><%= button_to "Ajouter un nouveau post", new_path, :method => 'get' %>
+			<br><%= button_to "Add a new Post", new_path, :method => 'get' %>
 		<% end %>	
 	</div>
 </body>

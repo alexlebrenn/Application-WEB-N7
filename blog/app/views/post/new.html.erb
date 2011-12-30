@@ -3,23 +3,24 @@
 <div class="bordure-left"></div>
 <div class="bordure-right"></div>
 <div class="Header">
-	<h1>Creation d'un nouveau Post</h1>
+	<h1>Creating a new Post</h1>
 </div>
 
 <%= form_tag(posts_path, :method => "post", :id => 'new_post' ) do %>
+	<%= render "error_messages", :target => @post %>  
 	<div class ="field">
-		 	<br><label for="author_post">Auteur du Post: </label>
+		 	<br><label for="author_post">Author : </label>
 		 	<br><input type="text" style="text-align:center; background-color:#A9A9A9"  readonly="true" id="author_post" name="author_post" cols="40" value="<%=session[:login]%>" />
 	</div>
 	<div class ="field">
-		 	<br><label for="title">Titre du Post: </label>
+		 	<br><label for="title">Title : </label>
 		 	<br><input type="text" style="text-align:center;" id="title" name="title" cols="40" />
 	</div>
 	<div class ="field">
-		<br><label for="body">Message : </label>
+		<br><label for="body">Body : </label>
 		<br><textarea name="body" id="body" rows="10" cols="40" ></textarea>
 	</div><br>
-	<%= submit_tag("Valider") %>
+	<%= submit_tag("Create") %>
 <% end %>
 
-<br><%= button_to "Page daccueil", posts_path, :method => "get" %>
+<br><%= button_to "Home Page", posts_path, :method => "get" %>

@@ -1,27 +1,26 @@
-<!-- Page de création d'un Post : /posts/new !-->
-
 <div class="bordure-left"></div>
 <div class="bordure-right"></div>
+
 <div class="Header">
-	<h1>Affichage du commentaire n°<%=@comment.id%></h1>
+	<h1>Comment n°<%=@comment.id%></h1>
 </div>
 
-<p>
-	<font color="green" id="notice"><%= notice %></font>
-</p>
+<p style="color : green"> <%= flash[:notice] %></p>
+<p style="color : red"> <%= flash[:error] %></p>
 
-<p>
 <div class ="field">
-		 	<br><label for="author">Auteur : </label>
-		 	<br><input type="text" readonly="true" id="author" name="author" cols="40" value="<%=@comment.author%>" />
+		 	<br><label for="author">Author : </label>
+		 	<br><input type="text" style="text-align:center; background-color:#A9A9A9" readonly="true" id="author" name="author" cols="40" value="<%=@comment.author%>" />
 </div>
-	<div class ="field">
-		<br><label for="body">Contenu : </label>
-		<br><textarea readonly name="body" id="body" rows="3" cols="40"><%=@comment.body%></textarea>
-	</div><br>
+<div class ="field">
+	<br><label for="body">Body : </label>
+	<br><textarea style="text-align:center;" readonly="true" name="body" id="body" rows="3" cols="40"><%=@comment.body%></textarea>
+</div><br>
 
-<!-- /posts/:post_id/comments/:id/edit -->
-<%= button_to 'Modifier', edit_post_comment_path(@comment.post, @comment), :method => "get" %><br>
+<% if (session[:id] == @comment.person_id) and (session[:id] != nil) %>
+	<!-- /posts/:post_id/comments/:id/edit -->
+	<%= button_to 'Edit', edit_post_comment_path(@comment.post, @comment), :method => "get" %><br>
+<% end %>
 
 <!-- /posts/:post_id/comments/ -->
-<%= button_to 'Retour', show_path(@comment.post), :method => 'get' %>
+<%= button_to 'Back', show_path(@comment.post), :method => 'get' %>

@@ -1,7 +1,7 @@
 <% if target.errors.any? %>  
 	<body>	
 		<div id="errorExplanation">  
-			<h2><font color="red">Veuillez corriger <%= pluralize(target.errors.count, "erreur") %> pour créer le nouveau compte :</font></h2>  
+			<h2><font color="red">Please correct <%= pluralize(target.errors.count, "error") %> to create or modify the User Account :</font></h2>  
 			<% target.errors.full_messages.each do |msg| %> 
 				<font color="red"><%= msg %></font><br> 
 			<% end %>  

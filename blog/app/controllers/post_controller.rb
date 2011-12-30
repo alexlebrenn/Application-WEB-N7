@@ -1,49 +1,28 @@
 class PostController < ApplicationController
 	
+	before_filter :authenticate, :except => [:index, :show]
+
 	#Page index => Page principal du blog
-	#Affichage de tous les posts sous forme de liste
 	def index
-		#if session[:person_id].nil?
 			@posts = Post.all
 
 		  respond_to do |format|
 		    format.html
 		    format.json { render json: @posts }
 		  end
-		#else
-			#redirect_to(new_path)
-		#end
   end
+
 
 	#Affichage d'un post
 	def show
-		#@post = Post.find(params[:id])
-    @post = Post.find(params[:id], :include => [{:comments => :person }])
+		@post = Post.find(params[:id])
 
  		respond_to do |format|
       format.html
       format.json { render json: @post }
-			format.js
     end
 	end
 	
-	#Création de posts
-	def create
-		@post = Post.new
-		@post.title = params[:title]
-		@post.body = params[:body]
-		@post.person_id = session[:id]
-		@post.save
-		
-		respond_to do |format|
-			format.html { redirect_to posts_path, notice: 'Post was successfully created with session.' }
-      format.json { render json: @post, status: :created, location: @post }
-			format.js
-		end
-	end
-  
-
-
 
 	def new
     @post = Post.new
@@ -51,31 +30,55 @@ class PostController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }
-      format.js # Task.new
     end
   end
 
 
+	#Création de posts
+	def create
+		@post = Post.new
+		@post.title = params[:title]
+		@post.body = params[:body]
+		if session[:id]
+			@post.person_id = session[:id]
+		end
+
+		if @post.save
+      respond_to do |format|
+        flash[:notice] = "Post was successfully created with session."
+        format.html { redirect_to(posts_path) }
+      end
+    else
+      respond_to do |format|
+        flash[:error] = "Post can\'t be created."
+        format.html { render :action => "new" }
+      end
+    end
+	end
 
 
-
-
-
-
-	#Modification de posts
 	def receive
 		@post = Post.find(params[:id])
 	end
 
+
+	#Modification de posts
 	def modify
 		@post = Post.find(params[:id])
 		@post.title = params[:title]
 		@post.body = params[:body]		
 		@post.save
 
-		respond_to do |format|
-	    format.html { redirect_to show_path, notice: 'Post was successfully updated.' }
-      format.json { head :ok }
+		if @post.save
+      respond_to do |format|
+        flash[:notice] = "Post was successfully updated."
+        format.html { redirect_to(show_path(@post.id)) }
+      end
+    else
+      respond_to do |format|
+        flash[:error] = "Post can\'t be updated."
+        format.html { render :action => "receive" }
+      end
     end
 	end
 

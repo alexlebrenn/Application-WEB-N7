@@ -3,10 +3,10 @@
 <div class="bordure-left"></div>
 <div class="bordure-right"></div>
 <div class="Header">
-	<h1>Ajout d'un commentaire</h1>
+	<h1>Creating a new Comment</h1>
 </div>
 
+<%= render "error_messages", :target => @comment %>  
 <%= render 'form' %>
 
-<!-- /posts/:post_id/comments/ -->
-<br><%= button_to 'Retour', show_path(@comment.post), :method => 'get' %>
+<br><%= button_to 'Back', show_path(@comment.post), :method => 'get' %>
